@@ -1,0 +1,32 @@
+<ngb-alert *ngIf="errorMsg != null || successMsg != null" [dismissible]="false" [type]="errorMsg ? 'danger' : 'success'">
+  {{ errorMsg }}{{ successMsg }}
+</ngb-alert>
+
+<ul class="list-group mt-3 mb-3">
+  <li class="list-group-item">
+
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input class="form-control" [value]="post?.title" [disabled]="!isReady" id="title" name="title" placeholder="Enter title" ngModel>
+      </div>
+
+      <div class="form-group">
+        <label for="content">Content</label>
+        <textarea class="form-control" id="content" [disabled]="!isReady" [value]="post?.body" name="content" rows="4" placeholder="Enter details" ngModel></textarea>
+      </div>
+
+      <div *ngIf="isReady" class="row justify-content-center text-center mt-4">
+        <div class="col">
+          <button type="submit" [disabled]="isLoading" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+
+      <app-spinner *ngIf="!isReady"></app-spinner>
+    </form>
+
+    <app-spinner *ngIf="isLoading"></app-spinner>
+
+  </li>
+</ul>

@@ -1,0 +1,24 @@
+<ul class="list-group mt-3 mb-3">
+  <li class="list-group-item">
+
+    <div class="col">
+      <h5>{{ post.title }}</h5>
+    </div>
+
+    <div class="col mt-2">
+      <p>{{ post.body }}</p>
+    </div>
+
+    <a routerLink="/posts/{{ post.id }}">
+      <button class="btn btn-secondary">See post</button>
+    </a>
+
+    <a routerLink="/edit/{{ post.id }}" class="ml-2">
+      <button class="btn btn-info">Edit</button>
+    </a>
+
+    <button class="btn btn-danger ml-2" (click)="onRemoveItem()">Remove</button>
+
+    <app-spinner *ngIf="isLoading"></app-spinner>
+  </li>
+</ul>
