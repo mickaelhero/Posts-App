@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PostService} from '../../../services/Post/post.service';
 import {ActivatedRoute} from '@angular/router';
 import {Post} from '../../../services/Post/post';
@@ -12,10 +12,18 @@ export class PostViewerComponent implements OnInit {
 
   post?: Post;
 
-  constructor(private postService: PostService, private route: ActivatedRoute) { }
+  get isSpinnerDisplayed(): boolean {
+    return this.post == null;
+  }
+
+
+  constructor(private postService: PostService, private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    this.postService.getByID(+this.route.snapshot.params.id).subscribe(value => { this.post = value; });
+    this.postService.getByID(+this.route.snapshot.params.id).subscribe(value => {
+      this.post = value;
+    });
   }
 
 }

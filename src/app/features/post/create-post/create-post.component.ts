@@ -13,10 +13,18 @@ import {Observable} from 'rxjs';
 export class CreatePostComponent implements OnInit {
 
   post?: Post;
-  isReady = false;
+  isComponentReady = false;
   errorMsg?: string;
   successMsg?: string;
-  isLoading = false;
+  isComponentLoading = false;
+
+  get isAlertDisplayed(): boolean {
+    return this.errorMsg != null || this.successMsg != null;
+  }
+
+  get alertType(): string {
+    return this.errorMsg ? 'danger' : 'success';
+  }
 
 
   constructor(private postService: PostService, private router: Router, private route: ActivatedRoute) {
@@ -41,11 +49,11 @@ export class CreatePostComponent implements OnInit {
   }
 
   setComponentReadyToUse() {
-    this.isReady = true;
+    this.isComponentReady = true;
   }
 
   onSubmit(form: NgForm) {
-    this.isLoading = true;
+    this.isComponentLoading = true;
 
     if (this.isEditMode()) {
       this.updatePost(form);
@@ -72,13 +80,13 @@ export class CreatePostComponent implements OnInit {
   }
 
   runSuccessRequest() {
-    this.isLoading = false;
+    this.isComponentLoading = false;
     this.successMsg = 'Done. you will be redirected to the feed on few seconds...';
     this.navigateToFeed();
   }
 
   runErrorRequest(error) {
-    this.isLoading = false;
+    this.isComponentLoading = false;
     this.errorMsg = error.message;
   }
 

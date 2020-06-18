@@ -1,4 +1,4 @@
-<ngb-alert *ngIf="errorMsg != null || successMsg != null" [dismissible]="false" [type]="errorMsg ? 'danger' : 'success'">
+<ngb-alert *ngIf="isAlertDisplayed" [dismissible]="false" [type]="alertType">
   {{ errorMsg }}{{ successMsg }}
 </ngb-alert>
 
@@ -9,24 +9,24 @@
 
       <div class="form-group">
         <label for="title">Title</label>
-        <input class="form-control" [value]="post?.title" [disabled]="!isReady" id="title" name="title" placeholder="Enter title" ngModel>
+        <input class="form-control" [value]="post?.title" [disabled]="!isComponentReady" id="title" name="title" placeholder="Enter title" ngModel>
       </div>
 
       <div class="form-group">
         <label for="content">Content</label>
-        <textarea class="form-control" id="content" [disabled]="!isReady" [value]="post?.body" name="content" rows="4" placeholder="Enter details" ngModel></textarea>
+        <textarea class="form-control" id="content" [disabled]="!isComponentReady" [value]="post?.body" name="content" rows="4" placeholder="Enter details" ngModel></textarea>
       </div>
 
-      <div *ngIf="isReady" class="row justify-content-center text-center mt-4">
+      <div *ngIf="isComponentReady" class="row justify-content-center text-center mt-4">
         <div class="col">
-          <button type="submit" [disabled]="isLoading" class="btn btn-primary">Submit</button>
+          <button type="submit" [disabled]="isComponentLoading" class="btn btn-primary">Submit</button>
         </div>
       </div>
 
-      <app-spinner *ngIf="!isReady"></app-spinner>
+      <app-spinner *ngIf="!isComponentReady"></app-spinner>
     </form>
 
-    <app-spinner *ngIf="isLoading"></app-spinner>
+    <app-spinner *ngIf="isComponentLoading"></app-spinner>
 
   </li>
 </ul>

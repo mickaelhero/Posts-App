@@ -11,6 +11,10 @@ export class PostsListComponent implements OnInit {
 
   posts?: Post[];
 
+  get isLoading(): boolean {
+    return this.posts == null;
+  }
+
 
   constructor(private postService: PostService) {
 
@@ -42,7 +46,7 @@ export class PostsListComponent implements OnInit {
   }
 
   trackByFn(index, item) {
-    return item.id; // unique id corresponding to the item
+    return item.id;
   }
 
 }
